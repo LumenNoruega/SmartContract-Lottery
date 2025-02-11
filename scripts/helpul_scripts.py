@@ -1,4 +1,4 @@
-from brownie import network, config, accounts, Contract, MockV3Aggregator
+from brownie import network, config, accounts, Contract, MockV3Aggregator, VRFCoordinatorMock, LinkToken
 from web3 import Web3
 from brownie.network.gas.strategies import LinearScalingStrategy
 
@@ -10,6 +10,8 @@ FORKED_LOCAL_ENVIROMENTS = ["mainnet-fork", "mainnet-fork-dev"]
 
 contract_to_mock = {
     "eth_usd_price_feed": MockV3Aggregator,
+    "vrf_coordinator": VRFCoordinatorMock,
+    "link_token": LinkToken
 }
 
 
@@ -56,4 +58,6 @@ def get_contract(contract_name):
 def deploy_mocks():
     account = get_account()
     MockV3Aggregator.deploy(DECIMALS, STARTING_PRICE, {"from": account})
+    link_token =LinkToken.deploy({"from": account})
+    VRFCoordinatorMock.deploy(link_token.address, {"from": account})
     print("Mocks deployed")
