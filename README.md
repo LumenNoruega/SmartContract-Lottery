@@ -44,3 +44,11 @@ Imports functions from helpful_scripts.py.
 - Added MockV3Aggregator.sol for ETH/USD price feed simulation.
 - Added VRFCoordinatorMock.sol to mock Chainlink VRF for randomness testing.
 - Added LinkToken.sol to simulate LINK token interactions.
+
+
+2025-02-11  
+- Implemented lottery functions: `start_lottery()`, `enter_lottery()`, and `end_lottery()` to handle the lottery lifecycle.  
+- Added `fund_with_link()` in `helpful_scripts.py` to transfer LINK tokens to contracts for Chainlink VRF requests.  
+- Fixed variable names in `fulfillRandomness()` to correctly handle randomness.  
+- Added `LinkTokenInterface.sol` for interacting with LINK tokens.  
+- Implemented `gas_strategy` to prevent Ganache from freezing during transactions.  

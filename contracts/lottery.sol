@@ -13,7 +13,7 @@ contract Lottery is Ownable, VRFConsumerBase{
     // vrf variables
     uint256 public fee;
     bytes32 public keyhash;
-    uint256 public randomResult;
+    uint256 public randomness;
 
     AggregatorV3Interface internal ethUsdPriceFeed;
     //after lottery
@@ -67,17 +67,17 @@ contract Lottery is Ownable, VRFConsumerBase{
         bytes32 requestId = requestRandomness(keyhash, fee);
     }
 
-    function fulfillRandomness(bytes32 requestId, uint256 randomness) internal override {
+    function fulfillRandomness(bytes32 requestId, uint256 _randomness) internal override {
         require(lottery_state == LOTTERY_STATE.CALCULATING_WINNER, "loterry is not open");
-        require(randomness > 0, "random-not-found");
-        uint256 indexOfWinner = randomness % players.length;
+        require(_randomness > 0, "random-not-found");
+        uint256 indexOfWinner = _randomness % players.length;
         recentWinner = players[indexOfWinner];
         //PAY TO THE WINNER
         recentWinner.transfer(address(this).balance);
         //reset the players array
         players = new address payable[](0);
         lottery_state = LOTTERY_STATE.CLOSED;
-        randomness = randomResult;
+        randomness = _randomness;
     }
 
     function getPriceFeed() public view returns (address) {
