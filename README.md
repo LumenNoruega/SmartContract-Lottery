@@ -65,3 +65,15 @@ Tests:
     Players can enter once it's active.
     The lottery can be ended properly.
     A winner is selected, and funds are distributed correctly.
+
+Integration Testing:
+This integration test validates the full execution of the lottery smart contract on a live blockchain network.
+
+Test:
+End-to-End Lottery Execution:
+- Deploying the contract on a non-local blockchain.
+- Starting the lottery.
+- Multiple participants entering.
+- Funding the contract with LINK tokens.
+- Ending the lottery and waiting for Chainlink VRF to provide randomness.
+- Ensuring a winner is selected and funds are distributed correctly.
