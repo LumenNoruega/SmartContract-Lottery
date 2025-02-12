@@ -52,3 +52,16 @@ Imports functions from helpful_scripts.py.
 - Fixed variable names in `fulfillRandomness()` to correctly handle randomness.  
 - Added `LinkTokenInterface.sol` for interacting with LINK tokens.  
 - Implemented `gas_strategy` to prevent Ganache from freezing during transactions.  
+
+
+2025-02-12
+This tests ensure that the lottery functions correctly using Brownie in a local blockchain environment.
+
+Tests:
+- Entrance Fee Calculation: Verifies that the getEntranceFee() function returns the correct value in Wei.
+- Entry Restrictions: Ensures that no one can enter the lottery before it starts.
+- Complete Lottery Flow:
+    The lottery can be successfully started.
+    Players can enter once it's active.
+    The lottery can be ended properly.
+    A winner is selected, and funds are distributed correctly.
